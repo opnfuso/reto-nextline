@@ -39,8 +39,8 @@ export async function getAllTareas(): Promise<
 
       tarea.creador = creador;
 
-      if (row.creador) {
-        const responsable = await getUsuarioById(row.id);
+      if (row.responsable) {
+        const responsable = await getUsuarioById(row.responsable);
 
         if (responsable) {
           tarea.responsable = responsable;
