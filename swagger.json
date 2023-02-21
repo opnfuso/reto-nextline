@@ -1,0 +1,336 @@
+{
+  "openapi": "3.0.3",
+  "info": {
+    "title": "Reto Nextline",
+    "version": "1.0.0"
+  },
+  "servers": [
+    {
+      "url": "http://localhost:3000/",
+      "description": "Servidor Local"
+    }
+  ],
+  "tags": [
+    {
+      "name": "Tareas",
+      "description": "Toda la información de los usuarios"
+    }
+  ],
+  "paths": {
+    "/tareas": {
+      "get": {
+        "tags": [
+          "Tareas"
+        ],
+        "summary": "Obtener todas las tareas",
+        "responses": {
+          "200": {
+            "description": "Operación exitosa",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Tarea"
+                  }
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Error en el servidor"
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "Tareas"
+        ],
+        "summary": "Crear una tarea",
+        "requestBody": {
+          "$ref": "#/components/requestBodies/Tarea"
+        },
+        "responses": {
+          "201": {
+            "description": "Creación exitosa",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Tarea"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/tareas/{id}": {
+      "get": {
+        "tags": [
+          "Tareas"
+        ],
+        "summary": "Obtener una tarea por el id",
+        "parameters": [
+          {
+            "name": "tareaId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "example": 1
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Operación exitosa",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Tarea"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "No encontrado"
+          },
+          "500": {
+            "description": "Error en el servidor"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Tareas"
+        ],
+        "summary": "Editar una tarea",
+        "parameters": [
+          {
+            "name": "tareaId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "example": 1
+            }
+          }
+        ],
+        "requestBody": {
+          "$ref": "#/components/requestBodies/Tarea"
+        },
+        "responses": {
+          "200": {
+            "description": "Operación exitosa",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Tarea"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "No encontrado"
+          },
+          "500": {
+            "description": "Error en el servidor"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Tareas"
+        ],
+        "summary": "Editar una tarea",
+        "parameters": [
+          {
+            "name": "tareaId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "example": 1
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Operación exitosa"
+          },
+          "404": {
+            "description": "No encontrado"
+          },
+          "500": {
+            "description": "Error en el servidor"
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "Tag": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "example": 1
+          },
+          "titulo": {
+            "type": "string",
+            "example": "matematicas"
+          }
+        }
+      },
+      "Usuario": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "example": 1
+          },
+          "nombre": {
+            "type": "string",
+            "example": "Mario Quevedo"
+          }
+        }
+      },
+      "Tarea": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "example": 1
+          },
+          "titulo": {
+            "type": "string",
+            "example": "Hacer la tarea de matematicas"
+          },
+          "descripcion": {
+            "type": "string",
+            "example": "Resolver las paginas del libro 50-60"
+          },
+          "completado": {
+            "type": "boolean",
+            "example": true
+          },
+          "fecha_entrega": {
+            "type": "string",
+            "format": "date",
+            "example": "2023/02/28"
+          },
+          "comentarios": {
+            "type": "string",
+            "example": "Los problemas del libro hablan de la multiplicación de matrices",
+            "nullable": true
+          },
+          "responsable": {
+            "$ref": "#/components/schemas/Usuario"
+          },
+          "creador": {
+            "$ref": "#/components/schemas/Usuario"
+          },
+          "tags": {
+            "nullable": true,
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Tag"
+            }
+          }
+        }
+      }
+    },
+    "requestBodies": {
+      "Tag": {
+        "description": "Objecto Tag que necesita ser añadido",
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "titulo": {
+                  "type": "string",
+                  "example": "matematicas"
+                }
+              }
+            }
+          }
+        }
+      },
+      "Usuario": {
+        "description": "Objecto Usuario que necesita ser añadido",
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "nombre": {
+                  "type": "string",
+                  "example": "Mario Quevedo"
+                }
+              }
+            }
+          }
+        }
+      },
+      "Tarea": {
+        "description": "Objecto Tarea que necesita ser añadido a la lista",
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "titulo": {
+                  "type": "string",
+                  "example": "Hacer la tarea de matematicas"
+                },
+                "descripcion": {
+                  "type": "string",
+                  "example": "Resolver las paginas del libro 50-60"
+                },
+                "completado": {
+                  "type": "boolean",
+                  "example": true
+                },
+                "fecha_entrega": {
+                  "type": "string",
+                  "format": "date",
+                  "example": "2023/02/28"
+                },
+                "comentarios": {
+                  "type": "string",
+                  "example": "Los problemas del libro hablan de la multiplicación de matrices",
+                  "nullable": true
+                },
+                "responsable": {
+                  "type": "string",
+                  "example": 1
+                },
+                "tags": {
+                  "nullable": true,
+                  "type": "array",
+                  "items": {
+                    "type": "string",
+                    "example": 1
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "securitySchemes": {
+      "bearerAuth": {
+        "type": "http",
+        "scheme": "bearer"
+      }
+    }
+  },
+  "security": [
+    {
+      "bearerAuth": []
+    }
+  ]
+}
