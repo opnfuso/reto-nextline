@@ -1,9 +1,8 @@
 import { Router } from 'express';
+import { getTareas } from '../controllers/tareas.controller';
 
 const router = Router();
 
-router.get('/', (_req, res) => {
-  res.send('Tareas');
-});
+router.get('/', getTareas);
 
 export default router;

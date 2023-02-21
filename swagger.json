@@ -37,6 +37,9 @@
               }
             }
           },
+          "404": {
+            "description": "No encontrado"
+          },
           "500": {
             "description": "Error en el servidor"
           }
