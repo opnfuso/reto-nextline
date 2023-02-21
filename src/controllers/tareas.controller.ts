@@ -34,3 +34,11 @@ export const getTarea = async (req: Request, res: Response) => {
     return res.send();
   }
 };
+
+export const postTarea = async (req: Request, res: Response) => {
+  const body = req.body;
+
+  console.log(body);
+
+  return res.send('Crear');
+};

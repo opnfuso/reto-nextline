@@ -28,3 +28,13 @@ export interface TareaParaEnviar {
   creador: Usuario;
   tags?: Tag[];
 }
+
+export interface CrearTarea {
+  titulo: string;
+  descripcion: string;
+  completado?: Boolean;
+  fecha_entrega: Date;
+  comentarios?: string;
+  responsable?: number;
+  creador: number;
+}
