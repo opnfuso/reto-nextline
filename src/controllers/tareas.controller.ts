@@ -13,3 +13,7 @@ export const getTareas = async (_req: Request, res: Response) => {
     return res.status(500);
   }
 };
+
+export const getTarea = async (_req: Request, res: Response) => {
+  return res.send('Tarea');
+};
