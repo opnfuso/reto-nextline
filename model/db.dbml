@@ -4,13 +4,13 @@ Project reto_nextline {
 }
 
 Table usuarios {
-  id int [pk, not null, unique, Note: 'Identificador unico del usuario']
+  id int [pk, not null, unique, increment, Note: 'Identificador unico del usuario']
   nombre varchar(50) [not null, Note: 'Nombre del usuario']
   Note: 'Tabla con la información de los usuarios'
 }
 
 Table tareas {
-  id int [pk, not null, unique, Note: 'Identificador unico de la tarea']
+  id int [pk, not null, unique, increment, Note: 'Identificador unico de la tarea']
   titulo varchar(100) [not null, Note: 'Título de la tarea']
   descripcion text [not null, Note: 'Descripción de la tarea']
   completado binary [not null, default: false, Note: 'Estado de compleción de la tarea, true para completada y false para no completada']
@@ -22,13 +22,13 @@ Table tareas {
 }
 
 Table tags {
-  id int [pk, not null, unique, Note: 'Identificador unico del tag']
+  id int [pk, not null, unique, increment, Note: 'Identificador unico del tag']
   titulo varchar(50) [not null, Note: 'Título del tag']
   Note: 'Tabla con la información de los tags'
 }
 
 Table tareas_tags {
-  id int [pk, not null, unique, Note: 'Identificador unico de la relación entre tarea y tags']
+  id int [pk, not null, unique, increment, Note: 'Identificador unico de la relación entre tarea y tags']
   id_tarea int [not null, Note: 'Identificador unico de la tarea']
   id_tag int [not null, Note: 'Identificador unico del tag']
   Note: 'Tabla para la relación entre tareas y tags'
