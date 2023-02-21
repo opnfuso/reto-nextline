@@ -1,0 +1,43 @@
+Project reto_nextline {
+  database_type: 'MySQL'
+  Note: 'Reto para el puesto de backend en la empresa Nextline S.C.'
+}
+
+Table usuarios {
+  id int [pk, not null, unique, Note: 'Identificador unico del usuario']
+  nombre varchar(50) [not null, Note: 'Nombre del usuario']
+  Note: 'Tabla con la información de los usuarios'
+}
+
+Table tareas {
+  id int [pk, not null, unique, Note: 'Identificador unico de la tarea']
+  titulo varchar(100) [not null, Note: 'Título de la tarea']
+  descripcion text [not null, Note: 'Descripción de la tarea']
+  completado binary [not null, default: false, Note: 'Estado de compleción de la tarea, true para completada y false para no completada']
+  fecha_entrega date [not null, Note: 'Fecha de entrega de la tarea']
+  comentarios text [Note: 'Comentarios opcionales de la tarea']
+  responsable int [Note: 'Identificador opcional del usuario responsable de la tarea']
+  creador int [not null, Note:'Identificador unico del usuario creador de la tarea']
+  Note: 'Tabla con la información de las tareas'
+}
+
+Table tags {
+  id int [pk, not null, unique, Note: 'Identificador unico del tag']
+  titulo varchar(50) [not null, Note: 'Título del tag']
+  Note: 'Tabla con la información de los tags'
+}
+
+Table tareas_tags {
+  id int [pk, not null, unique, Note: 'Identificador unico de la relación entre tarea y tags']
+  id_tarea int [not null, Note: 'Identificador unico de la tarea']
+  id_tag int [not null, Note: 'Identificador unico del tag']
+  Note: 'Tabla para la relación entre tareas y tags'
+}
+
+Ref: usuarios.id < tareas.creador [delete: cascade, update: no action]
+
+Ref: usuarios.id < tareas.responsable [delete: cascade, update: no action]
+
+Ref: tareas.id < tareas_tags.id_tarea [delete: cascade, update: no action]
+
+Ref: tags.id < tareas_tags.id_tag [delete: cascade, update: no action]
