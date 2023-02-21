@@ -1,8 +1,18 @@
 import { Request, Response } from 'express';
 import { getAllTareas, getTareaById } from '../services/tareas.service';
 
-export const getTareas = async (_req: Request, res: Response) => {
-  const response = await getAllTareas();
+export const getTareas = async (req: Request, res: Response) => {
+  // Obtener el id por medio del Bearer token
+  const auth = req.headers.authorization;
+
+  let response;
+
+  if (auth) {
+    const id = auth.split('Bearer')[1];
+    response = await getAllTareas(+id);
+  } else {
+    return res.status(404).send();
+  }
 
   if (response !== null && typeof response !== 'undefined') {
     res.status(200);
@@ -17,6 +27,12 @@ export const getTareas = async (_req: Request, res: Response) => {
 };
 
 export const getTarea = async (req: Request, res: Response) => {
+  const auth = req.headers.authorization;
+
+  if (auth === undefined) {
+    return res.status(404).send();
+  }
+
   const id = req.params.id;
 
   const response = await getTareaById(+id);
