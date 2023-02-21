@@ -13,7 +13,7 @@ Table tareas {
   id int [pk, not null, unique, increment, Note: 'Identificador unico de la tarea']
   titulo varchar(100) [not null, Note: 'Título de la tarea']
   descripcion text [not null, Note: 'Descripción de la tarea']
-  completado binary [not null, default: false, Note: 'Estado de compleción de la tarea, true para completada y false para no completada']
+  completado binary [default: false, Note: 'Estado de compleción de la tarea, true para completada y false para no completada']
   fecha_entrega date [not null, Note: 'Fecha de entrega de la tarea']
   comentarios text [Note: 'Comentarios opcionales de la tarea']
   responsable int [Note: 'Identificador opcional del usuario responsable de la tarea']

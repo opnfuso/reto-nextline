@@ -1,5 +1,10 @@
 import { pool } from '../db';
-import { CrearTarea, Tarea, TareaParaEnviar } from '../interfaces/tareas';
+import {
+  CrearTarea,
+  Tarea,
+  TareaModificada,
+  TareaParaEnviar
+} from '../interfaces/tareas';
 import { getTagsByTareaId } from './tags.service';
 import { getUsuarioById } from './usuarios.service';
 
@@ -162,6 +167,42 @@ export async function getTareaById(
   }
 }
 
-export async function createTarea(tarea: CrearTarea) {
-  console.log(tarea);
+export async function createTarea(
+  tarea: CrearTarea
+): Promise<TareaModificada | null> {
+  try {
+    const [rows] = await pool.query<any>(
+      'INSERT INTO tareas (titulo, descripcion, completado, fecha_entrega, comentarios, responsable, creador) VALUES (?, ?, ?, ?, ?, ?, ?)',
+      [
+        tarea.titulo,
+        tarea.descripcion,
+        tarea.completado,
+        tarea.fecha_entrega,
+        tarea.comentarios,
+        tarea.responsable,
+        tarea.creador
+      ]
+    );
+
+    if (rows.affectedRows >= 1) {
+      return {
+        id: rows.insertId,
+        titulo: tarea.titulo,
+        descripcion: tarea.descripcion,
+        completado: tarea.completado ? tarea.completado : false,
+        creador: tarea.creador,
+        fecha_entrega: tarea.fecha_entrega,
+        comentarios: tarea.comentarios,
+        responsable: tarea.responsable
+      };
+    } else {
+      return null;
+    }
+
+    return null;
+  } catch (error) {
+    // Si hay un error, lo muestra en la consola y devuelve null
+    console.error(error);
+    return null;
+  }
 }

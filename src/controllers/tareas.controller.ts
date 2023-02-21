@@ -1,5 +1,9 @@
 import { Request, Response } from 'express';
-import { getAllTareas, getTareaById } from '../services/tareas.service';
+import {
+  createTarea,
+  getAllTareas,
+  getTareaById
+} from '../services/tareas.service';
 
 export const getTareas = async (req: Request, res: Response) => {
   // Obtener el id por medio del Bearer token
@@ -52,9 +56,24 @@ export const getTarea = async (req: Request, res: Response) => {
 };
 
 export const postTarea = async (req: Request, res: Response) => {
+  const auth = req.headers.authorization;
+
+  if (auth === undefined) {
+    return res.status(404).send();
+  }
+
   const body = req.body;
 
-  console.log(body);
+  const response = await createTarea(body);
 
-  return res.send('Crear');
+  if (response !== null && typeof response !== 'undefined') {
+    res.status(200);
+    return res.send(response);
+  } else if (response === undefined) {
+    res.status(404);
+    return res.send();
+  } else {
+    res.status(500);
+    return res.send();
+  }
 };

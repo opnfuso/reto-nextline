@@ -12,6 +12,17 @@ export interface Tarea extends RowDataPacket {
   creador: number;
 }
 
+export interface TareaModificada {
+  id: number;
+  titulo: string;
+  descripcion: string;
+  completado: Boolean;
+  fecha_entrega: Date;
+  comentarios?: string;
+  responsable?: number;
+  creador: number;
+}
+
 export interface Usuario {
   id: number;
   nombre: string;

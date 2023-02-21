@@ -7,7 +7,7 @@ CREATE TABLE `tareas` (
   `id` int UNIQUE PRIMARY KEY NOT NULL AUTO_INCREMENT COMMENT 'Identificador unico de la tarea',
   `titulo` varchar(100) NOT NULL COMMENT 'Título de la tarea',
   `descripcion` text NOT NULL COMMENT 'Descripción de la tarea',
-  `completado` binary NOT NULL DEFAULT false COMMENT 'Estado de compleción de la tarea, true para completada y false para no completada',
+  `completado` binary DEFAULT false COMMENT 'Estado de compleción de la tarea, true para completada y false para no completada',
   `fecha_entrega` date NOT NULL COMMENT 'Fecha de entrega de la tarea',
   `comentarios` text COMMENT 'Comentarios opcionales de la tarea',
   `responsable` int COMMENT 'Identificador opcional del usuario responsable de la tarea',
