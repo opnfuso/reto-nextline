@@ -117,7 +117,7 @@
           }
         ],
         "requestBody": {
-          "$ref": "#/components/requestBodies/Tarea"
+          "$ref": "#/components/requestBodies/EditTarea"
         },
         "responses": {
           "200": {
@@ -276,6 +276,57 @@
       },
       "Tarea": {
         "description": "Objecto Tarea que necesita ser añadido a la lista",
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "required": [
+                "titulo",
+                "descripcion",
+                "fecha_entrega"
+              ],
+              "properties": {
+                "titulo": {
+                  "type": "string",
+                  "example": "Hacer la tarea de matematicas"
+                },
+                "descripcion": {
+                  "type": "string",
+                  "example": "Resolver las paginas del libro 50-60"
+                },
+                "completado": {
+                  "type": "boolean",
+                  "example": true
+                },
+                "fecha_entrega": {
+                  "type": "string",
+                  "format": "date",
+                  "example": "2023/02/28"
+                },
+                "comentarios": {
+                  "type": "string",
+                  "example": "Los problemas del libro hablan de la multiplicación de matrices",
+                  "nullable": true
+                },
+                "responsable": {
+                  "type": "string",
+                  "example": 1
+                },
+                "tags": {
+                  "nullable": true,
+                  "type": "array",
+                  "items": {
+                    "type": "string",
+                    "example": 1
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "EditTarea": {
+        "description": "Objecto Tarea que necesita ser editado",
         "content": {
           "application/json": {
             "schema": {
