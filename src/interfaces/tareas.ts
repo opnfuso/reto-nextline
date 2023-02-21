@@ -49,3 +49,13 @@ export interface CrearTarea {
   responsable?: number;
   creador: number;
 }
+
+export interface EditarTarea {
+  titulo?: string;
+  descripcion?: string;
+  completado?: Boolean;
+  fecha_entrega?: Date;
+  comentarios?: string;
+  responsable?: number;
+  creador?: number;
+}

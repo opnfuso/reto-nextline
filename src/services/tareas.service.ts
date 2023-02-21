@@ -1,6 +1,7 @@
 import { pool } from '../db';
 import {
   CrearTarea,
+  EditarTarea,
   Tarea,
   TareaModificada,
   TareaParaEnviar
@@ -167,10 +168,17 @@ export async function getTareaById(
   }
 }
 
+/**
+ * Crea una nueva tarea en la base de datos.
+ *
+ * @param tarea El objeto `CrearTarea` que describe la tarea a crear.
+ * @returns Un objeto de tipo `TareaModificada` si la inserción es exitosa, `null` si la inserción falla.
+ */
 export async function createTarea(
   tarea: CrearTarea
 ): Promise<TareaModificada | null> {
   try {
+    // Ejecuta la consulta para insertar una nueva tarea en la base de datos, usando los datos del objeto `tarea`
     const [rows] = await pool.query<any>(
       'INSERT INTO tareas (titulo, descripcion, completado, fecha_entrega, comentarios, responsable, creador) VALUES (?, ?, ?, ?, ?, ?, ?)',
       [
@@ -184,11 +192,13 @@ export async function createTarea(
       ]
     );
 
+    // Si la inserción es exitosa, devuelve un objeto de tipo `TareaModificada`
     if (rows.affectedRows >= 1) {
       return {
         id: rows.insertId,
         titulo: tarea.titulo,
         descripcion: tarea.descripcion,
+        // Si no se envió completado por el usuario se inserta por defecto el valor false en la base de datos
         completado: tarea.completado ? tarea.completado : false,
         creador: tarea.creador,
         fecha_entrega: tarea.fecha_entrega,
@@ -196,12 +206,53 @@ export async function createTarea(
         responsable: tarea.responsable
       };
     } else {
+      // Si no se inserta ninguna fila, devuelve `null`
       return null;
     }
-
-    return null;
   } catch (error) {
-    // Si hay un error, lo muestra en la consola y devuelve null
+    // Si hay un error, lo muestra en la consola y devuelve `null`
+    console.error(error);
+    return null;
+  }
+}
+
+/**
+ * Editar una tarea en la base de datos.
+ *
+ * @param tarea El objeto `Editar` que describe la tarea a editar.
+ * @returns Un objeto de tipo `TareaModificada` si la edición es exitosa, `null` si la edición falla.
+ */
+export async function updateTarea(tarea: EditarTarea, id: number) {
+  try {
+    // Se ejecuta una consulta SQL para actualizar la tarea en la base de datos
+    const [rows] = await pool.query<any>(
+      'UPDATE tareas SET titulo = IFNULL(?, titulo), descripcion = IFNULL(?, descripcion), completado = IFNULL(?, completado), fecha_entrega = IFNULL(?, fecha_entrega), comentarios = IFNULL(?, comentarios), responsable = IFNULL(?, responsable), creador = IFNULL(?, creador) WHERE id = ?',
+      [
+        tarea.titulo,
+        tarea.descripcion,
+        tarea.completado,
+        tarea.fecha_entrega,
+        tarea.comentarios,
+        tarea.responsable,
+        tarea.creador,
+        id
+      ]
+    );
+
+    // Si la actualización afectó al menos una fila, se ejecuta otra consulta SQL para obtener la tarea actualizada
+    if (rows.affectedRows >= 1) {
+      const response = await pool.query<Tarea[]>(
+        'SELECT * FROM tareas WHERE id = ?',
+        id
+      );
+
+      // Se retorna la tarea actualizada
+      return response[0][0];
+    } else {
+      return null;
+    }
+  } catch (error) {
+    // Si hay un error, se muestra en la consola y se devuelve `null`
     console.error(error);
     return null;
   }

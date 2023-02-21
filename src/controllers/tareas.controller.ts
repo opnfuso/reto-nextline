@@ -2,7 +2,8 @@ import { Request, Response } from 'express';
 import {
   createTarea,
   getAllTareas,
-  getTareaById
+  getTareaById,
+  updateTarea
 } from '../services/tareas.service';
 
 export const getTareas = async (req: Request, res: Response) => {
@@ -65,6 +66,30 @@ export const postTarea = async (req: Request, res: Response) => {
   const body = req.body;
 
   const response = await createTarea(body);
+
+  if (response !== null && typeof response !== 'undefined') {
+    res.status(200);
+    return res.send(response);
+  } else if (response === undefined) {
+    res.status(404);
+    return res.send();
+  } else {
+    res.status(500);
+    return res.send();
+  }
+};
+
+export const putTarea = async (req: Request, res: Response) => {
+  const auth = req.headers.authorization;
+
+  if (auth === undefined) {
+    return res.status(404).send();
+  }
+
+  const body = req.body;
+  const id = req.params.id;
+
+  const response = await updateTarea(body, +id);
 
   if (response !== null && typeof response !== 'undefined') {
     res.status(200);
