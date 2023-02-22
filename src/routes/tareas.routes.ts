@@ -1,5 +1,6 @@
 import { Router } from 'express';
 import {
+  deleteTarea,
   getTarea,
   getTareas,
   postTarea,
@@ -17,5 +18,7 @@ router.get('/:id', getTarea);
 router.post('/', validationHandler(createTareaSchema), postTarea);
 
 router.put('/:id', validationHandler(updateTareaSchema), putTarea);
+
+router.delete('/:id', deleteTarea);
 
 export default router;

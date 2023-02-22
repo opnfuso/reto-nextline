@@ -1,6 +1,7 @@
 import { RowDataPacket } from 'mysql2';
 import { Tag } from './tags';
 
+// Define una tarea almacenada en la base de datos
 export interface Tarea extends RowDataPacket {
   id: number;
   titulo: string;
@@ -12,6 +13,7 @@ export interface Tarea extends RowDataPacket {
   creador: number;
 }
 
+// Define la forma de una tarea modificada
 export interface TareaModificada {
   id: number;
   titulo: string;
@@ -23,11 +25,13 @@ export interface TareaModificada {
   creador: number;
 }
 
+// Define la forma de un usuario
 export interface Usuario {
   id: number;
   nombre: string;
 }
 
+// Define la forma de una tarea para enviar como respuesta
 export interface TareaParaEnviar {
   id: number;
   titulo: string;
@@ -40,6 +44,7 @@ export interface TareaParaEnviar {
   tags?: Tag[];
 }
 
+// Define la forma de los datos necesarios para crear una nueva tarea
 export interface CrearTarea {
   titulo: string;
   descripcion: string;
@@ -50,6 +55,7 @@ export interface CrearTarea {
   creador: number;
 }
 
+// Define la forma de los datos necesarios para editar una tarea existente
 export interface EditarTarea {
   titulo?: string;
   descripcion?: string;

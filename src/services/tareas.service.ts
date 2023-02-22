@@ -257,3 +257,21 @@ export async function updateTarea(tarea: EditarTarea, id: number) {
     return null;
   }
 }
+
+export async function deleteTareaById(
+  id: Number
+): Promise<true | null | undefined> {
+  try {
+    const [rows] = await pool.query<any>('DELETE FROM tareas WHERE id = ?', id);
+
+    if (rows.affectedRows >= 1) {
+      return true;
+    } else {
+      return undefined;
+    }
+  } catch (error) {
+    // Si hay un error, se muestra en la consola y se devuelve `null`
+    console.error(error);
+    return null;
+  }
+}

@@ -1,6 +1,7 @@
 import { Request, Response } from 'express';
 import {
   createTarea,
+  deleteTareaById,
   getAllTareas,
   getTareaById,
   updateTarea
@@ -41,8 +42,6 @@ export const getTarea = async (req: Request, res: Response) => {
   const id = req.params.id;
 
   const response = await getTareaById(+id);
-
-  console.log(response);
 
   if (response !== null && typeof response !== 'undefined') {
     res.status(200);
@@ -94,6 +93,29 @@ export const putTarea = async (req: Request, res: Response) => {
   if (response !== null && typeof response !== 'undefined') {
     res.status(200);
     return res.send(response);
+  } else if (response === undefined) {
+    res.status(404);
+    return res.send();
+  } else {
+    res.status(500);
+    return res.send();
+  }
+};
+
+export const deleteTarea = async (req: Request, res: Response) => {
+  const auth = req.headers.authorization;
+
+  if (auth === undefined) {
+    return res.status(404).send();
+  }
+
+  const id = req.params.id;
+
+  const response = await deleteTareaById(+id);
+
+  if (response !== null && typeof response !== 'undefined') {
+    res.status(200);
+    return res.send();
   } else if (response === undefined) {
     res.status(404);
     return res.send();
