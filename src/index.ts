@@ -11,7 +11,7 @@ import tareasRoutes from './routes/tareas.routes';
 import helmet from 'helmet';
 
 // CORS
-app.use(cors);
+app.use(cors());
 
 // Helmet
 app.use(helmet());

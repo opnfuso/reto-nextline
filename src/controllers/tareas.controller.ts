@@ -21,8 +21,8 @@ export const getTareas = async (req: Request, res: Response) => {
     const id = auth.split('Bearer')[1];
     response = await getAllTareas(+id);
   } else {
-    // Si no hay token de autorización, se devuelve una respuesta con código de estado 404 (Not Found).
-    return res.status(404).send();
+    // Si no hay token de autorización, se devuelve una respuesta con código de estado 403 (Forbidden).
+    return res.status(403).send();
   }
 
   // Si la respuesta no es null ni undefined, se devuelve una respuesta con código de estado 200 y se envía la respuesta.
@@ -49,9 +49,9 @@ export const getTarea = async (req: Request, res: Response) => {
   // Se obtiene el token de autorización de la petición.
   const auth = req.headers.authorization;
 
-  // Si no hay token de autorización, se devuelve una respuesta con código de estado 404 (Not Found).
+  // Si no hay token de autorización, se devuelve una respuesta con código de estado 403 (Forbidden).
   if (auth === undefined) {
-    return res.status(404).send();
+    return res.status(403).send();
   }
 
   // Se obtiene el id de la tarea de la petición.
@@ -84,9 +84,9 @@ export const postTarea = async (req: Request, res: Response) => {
   // Se obtiene el token de autorización de la petición.
   const auth = req.headers.authorization;
 
-  // Si no hay token de autorización, se devuelve una respuesta con código de estado 404 (Not Found).
+  // Si no hay token de autorización, se devuelve una respuesta con código de estado 403 (Forbidden).
   if (auth === undefined) {
-    return res.status(404).send();
+    return res.status(403).send();
   }
 
   // Se obtiene el cuerpo de la petición, que contiene los datos de la nueva tarea.
@@ -119,9 +119,9 @@ export const putTarea = async (req: Request, res: Response) => {
   // Se obtiene el token de autorización de la petición.
   const auth = req.headers.authorization;
 
-  // Si no hay token de autorización, se devuelve una respuesta con código de estado 404 (Not Found).
+  // Si no hay token de autorización, se devuelve una respuesta con código de estado 403 (Forbidden).
   if (auth === undefined) {
-    return res.status(404).send();
+    return res.status(403).send();
   }
 
   // Se obtiene el cuerpo de la petición, que contiene los datos actualizados de la tarea.
@@ -157,8 +157,8 @@ export const deleteTarea = async (req: Request, res: Response) => {
   const auth = req.headers.authorization;
 
   if (auth === undefined) {
-    // Si no hay token de autorización, devolver un error 404
-    return res.status(404).send();
+    // Si no hay token de autorización, se devuelve una respuesta con código de estado 403 (Forbidden).
+    return res.status(403).send();
   }
 
   // Obtener el ID de la tarea de los parámetros de la solicitud

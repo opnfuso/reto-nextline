@@ -37,6 +37,9 @@
               }
             }
           },
+          "403": {
+            "description": "Sin acceso"
+          },
           "404": {
             "description": "No encontrado"
           },
@@ -66,6 +69,9 @@
           },
           "400": {
             "description": "Datos faltantes o incorrectos en el cuerpo"
+          },
+          "403": {
+            "description": "Sin acceso"
           }
         }
       }
@@ -97,6 +103,9 @@
                 }
               }
             }
+          },
+          "403": {
+            "description": "Sin acceso"
           },
           "404": {
             "description": "No encontrado"
@@ -139,6 +148,9 @@
           "400": {
             "description": "Datos faltantes o incorrectos en el cuerpo"
           },
+          "403": {
+            "description": "Sin acceso"
+          },
           "404": {
             "description": "No encontrado"
           },
@@ -166,6 +178,9 @@
         "responses": {
           "200": {
             "description": "Operación exitosa"
+          },
+          "403": {
+            "description": "Sin acceso"
           },
           "404": {
             "description": "No encontrado"
