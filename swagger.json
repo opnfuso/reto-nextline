@@ -6,7 +6,7 @@
   },
   "servers": [
     {
-      "url": "http://localhost:3000/",
+      "url": "http://localhost:3000",
       "description": "Servidor Local"
     }
   ],
@@ -63,6 +63,9 @@
                 }
               }
             }
+          },
+          "400": {
+            "description": "Datos faltantes o incorrectos en el cuerpo"
           }
         }
       }
@@ -75,7 +78,7 @@
         "summary": "Obtener una tarea por el id",
         "parameters": [
           {
-            "name": "tareaId",
+            "name": "id",
             "in": "path",
             "required": true,
             "schema": {
@@ -110,7 +113,7 @@
         "summary": "Editar una tarea",
         "parameters": [
           {
-            "name": "tareaId",
+            "name": "id",
             "in": "path",
             "required": true,
             "schema": {
@@ -133,6 +136,9 @@
               }
             }
           },
+          "400": {
+            "description": "Datos faltantes o incorrectos en el cuerpo"
+          },
           "404": {
             "description": "No encontrado"
           },
@@ -148,7 +154,7 @@
         "summary": "Editar una tarea",
         "parameters": [
           {
-            "name": "tareaId",
+            "name": "id",
             "in": "path",
             "required": true,
             "schema": {
@@ -286,7 +292,8 @@
               "required": [
                 "titulo",
                 "descripcion",
-                "fecha_entrega"
+                "fecha_entrega",
+                "creador"
               ],
               "properties": {
                 "titulo": {
@@ -314,14 +321,6 @@
                 "responsable": {
                   "type": "string",
                   "example": 1
-                },
-                "tags": {
-                  "nullable": true,
-                  "type": "array",
-                  "items": {
-                    "type": "string",
-                    "example": 1
-                  }
                 }
               }
             }
@@ -360,14 +359,6 @@
                 "responsable": {
                   "type": "string",
                   "example": 1
-                },
-                "tags": {
-                  "nullable": true,
-                  "type": "array",
-                  "items": {
-                    "type": "string",
-                    "example": 1
-                  }
                 }
               }
             }
