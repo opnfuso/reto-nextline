@@ -3,6 +3,8 @@
 API REST que permite el funcionamiento de un sistema de gestión
 de tareas, utilizando Node.js y Express.
 
+Para indicarle el usuario que está usando la plataforma se pasa un token Bearer que contiene el id del usuario.
+
 ## BD
 
 La base de datos fue modelada utilizando la ayuda de la plataforma [dbdiagram.io](https://dbdiagram.io/home)
