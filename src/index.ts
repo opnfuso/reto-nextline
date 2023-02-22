@@ -1,5 +1,5 @@
 import express from 'express';
-const app = express();
+export const app = express();
 
 import swaggerUi from 'swagger-ui-express';
 import swaggerDocument from '../swagger.json';
@@ -24,6 +24,6 @@ app.use(express.json());
 // Rutas
 app.use('/tareas', tareasRoutes);
 
-app.listen(PORT, () => {
+export const server = app.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`);
 });
