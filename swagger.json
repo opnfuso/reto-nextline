@@ -6,6 +6,10 @@
   },
   "servers": [
     {
+      "url": "https://reto-nextline-production.up.railway.app/",
+      "description": "Servidor de producción"
+    },
+    {
       "url": "http://localhost:3000",
       "description": "Servidor Local"
     }
