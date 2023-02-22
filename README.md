@@ -43,8 +43,6 @@ Comandos para iniciar el proyecto (Se necesita tener MySQL)
 
 **Conexión a la BD:** [mysql2](https://github.com/sidorares/node-mysql2)
 
-**Testing:** [Jest](https://jestjs.io/), [Supertest](https://github.com/ladjs/supertest)
-
 **BD:** MySQL
 
 ## Autor
