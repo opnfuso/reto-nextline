@@ -31,14 +31,14 @@ export async function getAllTareas(
     }
 
     // Se declara un arreglo vacío para almacenar las tareas que se van a enviar.
-    let tareas: TareaParaEnviar[] = [];
+    const tareas: TareaParaEnviar[] = [];
 
     // Se utiliza un ciclo `for` para iterar sobre cada tarea que se encontró en la base de datos.
     for (let i = 0; i < rows.length; i++) {
       const row = rows[i];
 
       // Se crea un objeto `TareaParaEnviar` que va a contener la información que se va a enviar al cliente.
-      let tarea: TareaParaEnviar = {
+      const tarea: TareaParaEnviar = {
         id: row.id,
         titulo: row.titulo,
         descripcion: row.descripcion,
@@ -118,7 +118,7 @@ export async function getTareaById(
     const row = rows[0];
 
     // Se crea un objeto "tarea" con los campos correspondientes de la fila obtenida de la base de datos
-    let tarea: TareaParaEnviar = {
+    const tarea: TareaParaEnviar = {
       id: row.id,
       titulo: row.titulo,
       descripcion: row.descripcion,
@@ -259,7 +259,7 @@ export async function updateTarea(tarea: EditarTarea, id: number) {
 }
 
 export async function deleteTareaById(
-  id: Number
+  id: number
 ): Promise<true | null | undefined> {
   try {
     const [rows] = await pool.query<any>('DELETE FROM tareas WHERE id = ?', id);

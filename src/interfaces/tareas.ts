@@ -18,7 +18,7 @@ export interface TareaModificada {
   id: number;
   titulo: string;
   descripcion: string;
-  completado: Boolean;
+  completado: boolean;
   fecha_entrega: Date;
   comentarios?: string;
   responsable?: number;
@@ -48,7 +48,7 @@ export interface TareaParaEnviar {
 export interface CrearTarea {
   titulo: string;
   descripcion: string;
-  completado?: Boolean;
+  completado?: boolean;
   fecha_entrega: Date;
   comentarios?: string;
   responsable?: number;
@@ -59,7 +59,7 @@ export interface CrearTarea {
 export interface EditarTarea {
   titulo?: string;
   descripcion?: string;
-  completado?: Boolean;
+  completado?: boolean;
   fecha_entrega?: Date;
   comentarios?: string;
   responsable?: number;
