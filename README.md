@@ -5,6 +5,8 @@ de tareas, utilizando Node.js y Express.
 
 Para indicarle el usuario que está usando la plataforma se pasa un token Bearer que contiene el id del usuario.
 
+Hay 2 usuarios en la BD de prueba, con id 1 y 2
+
 ## BD
 
 La base de datos fue modelada utilizando la ayuda de la plataforma [dbdiagram.io](https://dbdiagram.io/home)
