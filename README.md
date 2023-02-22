@@ -33,14 +33,6 @@ Comandos para iniciar el proyecto (Se necesita tener MySQL)
   npm run start
 ```
 
-## Tests
-
-Para ejecutar los tests, ejecute el siguiente comando
-
-```bash
-  npm run test
-```
-
 ## Tech Stack
 
 **Server:** Node, Express
